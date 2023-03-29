@@ -1,15 +1,19 @@
 import './App.css';
-import { HomeView } from './components/HomeView/HomeView';
 import { NavBar } from './components/NavBar/NavBar';
+import { ItemListContainer } from './components/ItemListContainer/ItemListContainer';
 
 function App() {
+  const title = "Merchandising";
+  
   return (
     <>
-      <div className='App'>
-        <NavBar/>
-        <h1>Hola mundo!</h1>
-        <HomeView/>
-      </div>
+      <header>
+        <NavBar />
+      </header>
+      
+      <main>
+        <ItemListContainer title={title} />
+      </main>
     </>
   );
 }
