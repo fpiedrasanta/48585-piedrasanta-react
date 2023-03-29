@@ -1,13 +1,14 @@
 import React from 'react'
 import './CartWidget.css'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+
 export const CartWidget = () => {
   return (
-    <li className="nav-item " >
-      <a id="boton_carrito" className="btn btn-secondary">
-        <i className="fas fa-shopping-cart fa-1x"></i>
-        <span id="cantidad_carrito" className="badge rounded-circle">1</span>
-      </a>
-    </li>
+    <a href="index.html" className="navbar-brand" id="boton_carrito">
+      <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
+      <span id="cantidad_carrito" className="badge rounded-circle">1</span>
+    </a>
   )
 }
