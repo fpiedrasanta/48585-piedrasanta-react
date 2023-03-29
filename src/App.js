@@ -12,7 +12,7 @@ function App() {
       </header>
       
       <main>
-        <ItemListContainer title={title} />
+        <ItemListContainer greeting={title} />
       </main>
     </>
   );
