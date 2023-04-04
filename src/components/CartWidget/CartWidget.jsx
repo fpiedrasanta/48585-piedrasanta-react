@@ -6,7 +6,7 @@ import { ItemCount } from '../ItemCount/ItemCount';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-export const CartWidget = () => {
+export const CartWidget = ({ cantidadTotal }) => {
   const itemCountStyle = {
     top: 0 + 'px'
   };
@@ -14,7 +14,7 @@ export const CartWidget = () => {
   return (
     <a href="index.html" className="navbar-brand" id="boton_carrito">
       <FontAwesomeIcon icon={faShoppingCart} className="mr-2" />
-      <ItemCount count="1" style={itemCountStyle}/>
+      <ItemCount count={cantidadTotal} style={itemCountStyle}/>
     </a>
   )
 }

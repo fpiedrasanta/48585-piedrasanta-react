@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import { CartWidget } from '../CartWidget/CartWidget'
 
-export const NavBar = () => {
+export const NavBar = ({cantidadTotal}) => {
   return (
     <div className="menu">
       <div className="menu-content">
@@ -42,7 +42,7 @@ export const NavBar = () => {
               </ul>
             </div>
 
-            <CartWidget />
+            <CartWidget cantidadTotal={cantidadTotal}/>
           </div>
         </nav>
       </div>

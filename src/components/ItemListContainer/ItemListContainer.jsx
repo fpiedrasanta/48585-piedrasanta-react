@@ -3,11 +3,11 @@ import './ItemListContainer.css'
 
 import { ItemList } from '../ItemList/ItemList';
 
-export const ItemListContainer = (props) => {
+export const ItemListContainer = ({ agregarProducto }) => {
   return (
     <div className="product-content">
       <div id="productos" className="row">
-        <ItemList />
+        <ItemList agregarProducto={agregarProducto} />
       </div>
     </div>
   )
