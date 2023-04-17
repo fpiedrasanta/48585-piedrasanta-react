@@ -4,6 +4,13 @@ import { ItemListContainer } from './components/ItemListContainer/ItemListContai
 import { useState } from 'react';
 import { CarritoCompra, DetalleCarritoCompra } from './components/Classes/clases';
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Navigate,
+  Route
+} from 'react-router-dom'
+
 function App() {
   const [carritoCompra, setCarritoCompra] = useState(new CarritoCompra(null, []));
   const [cantidadTotal, setCantidadTotal] = useState(0);
@@ -33,15 +40,24 @@ function App() {
   }
 
   return (
-    <>
-      <header>
-        <NavBar cantidadTotal={cantidadTotal}/>
-      </header>
+    // <>
+    //   <header>
+    //     <NavBar cantidadTotal={cantidadTotal}/>
+    //   </header>
       
-      <main>
-        <ItemListContainer agregarProducto={agregarProducto} carritoCompra={carritoCompra}/>
-      </main>
-    </>
+    //   <main>
+    //     <ItemListContainer agregarProducto={agregarProducto} carritoCompra={carritoCompra}/>
+    //   </main>
+    // </>
+    <div>
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route path='/' element={ItemListContainer} />
+          <Route path='*' element={<Navigate to='/' />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
