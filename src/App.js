@@ -1,19 +1,33 @@
 import './App.css';
+
 import { NavBar } from './components/NavBar/NavBar';
 import { ItemListContainer } from './components/ItemListContainer/ItemListContainer';
+import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetailContainer';
+/* import { Error } from './Error'; */
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Navigate,
+  Route
+} from 'react-router-dom'
 
 function App() {
-  const title = "Merchandising";
-  
   return (
     <>
       <header>
-        <NavBar />
+        <Router>
+          <NavBar />
+
+          <Routes>
+            <Route path='/' element={<ItemListContainer />} />
+            <Route path='/productos/:categoryId' element={<ItemListContainer />} />
+            <Route path='/detalle/:itemId' element={<ItemDetailContainer />} />
+            { /*<Route path='/error' element={<Error />} /> */ }
+            { /* <Route path='*' element={<Navigate to='/error' />} /> */ }
+          </Routes>
+        </Router>
       </header>
-      
-      <main>
-        <ItemListContainer greeting={title} />
-      </main>
     </>
   );
 }

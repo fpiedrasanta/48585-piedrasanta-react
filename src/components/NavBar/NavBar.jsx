@@ -1,50 +1,36 @@
 import React from 'react';
 import './NavBar.css'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 import { CartWidget } from '../CartWidget/CartWidget'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 export const NavBar = () => {
   return (
     <div className="menu">
-      <div className="menu-content">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="menu-content">  
+        <Navbar bg="light" expand="lg" className="navbar navbar-expand-lg navbar-dark bg-dark">
           <div className="container-fluid">
-            <a className="navbar-brand" href="index.html">
-              <img src="android-chrome-192x192.png" alt="Logo" />
-            </a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item active">
-                  <a className="nav-link" href="index.html">Home</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="sobre-nosotros.html">Sobre nosotros</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="merchandising.html">Merchandising</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="novedades.html">Novedades</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="galeria.html">Galeria</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="contacto.html">Contacto</a>
-                </li>
-              </ul>
-            </div>
+            <Navbar.Brand as={Link} to='/' className="ml-auto">
+              <img src="/android-chrome-192x192.png" alt="Logo" />
+            </Navbar.Brand>
 
-            <CartWidget />
+            <Navbar.Toggle className="navbar-toggler" aria-controls="basic-navbar-nav" />
+            
+            <Navbar.Collapse id="basic-navbar-nav" className="collapse navbar-collapse">
+              <Nav className="navbar-nav ms-auto">
+                <Nav.Link as={Link} to='/'>Inicio</Nav.Link>
+                <Nav.Link as={Link} to='/productos/indumentaria'>Indumentaria</Nav.Link>
+                <Nav.Link as={Link} to='/productos/figuras'>Figuras 3D</Nav.Link>
+                <Nav.Link as={Link} to='/cart'><CartWidget /></Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
           </div>
-        </nav>
+        </Navbar>
       </div>
     </div>
   );

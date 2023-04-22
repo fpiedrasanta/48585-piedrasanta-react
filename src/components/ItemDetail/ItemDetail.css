@@ -13,3 +13,13 @@ main {
     padding: 20px;
     background-color: white; 
 }
+
+.img-detail {
+    width: 100%;
+}
+
+.wrap-btn-add-cart {
+    width: "100%";
+    text-align: center;
+    margin-top: 40px;
+}

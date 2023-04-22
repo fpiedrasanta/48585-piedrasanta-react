@@ -1,0 +1,20 @@
+.contador {
+    display: grid;
+    grid-template-columns: 35px 120px 35px 35px;
+    column-gap: 10px;
+    row-gap: 10px;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-top: 40px;
+}
+
+.btn-contador {
+    width: 100%;
+}
+
+.txt-contador {
+    width: 100%;
+    text-align: center;
+}

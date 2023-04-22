@@ -3,9 +3,9 @@
 }
 
 #cantidad_carrito {
-    position: absolute;
-    top: -10%;
-    right: -50%;
+    position: relative;
+    top: -35px;
+    right: -20px;
     background: red;
     width: 16px;
     height: 16px;
