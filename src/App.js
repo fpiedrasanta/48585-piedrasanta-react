@@ -5,16 +5,38 @@ import { ItemListContainer } from './components/ItemListContainer/ItemListContai
 import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetailContainer';
 /* import { Error } from './Error'; */
 
+import { CartContext } from './components/context/CartContext';
+
 import {
   BrowserRouter as Router,
   Routes,
   Navigate,
   Route
 } from 'react-router-dom'
+import { useState } from 'react';
 
 function App() {
+  const [carrito, setCarrito] = useState([]);
+
+  const agregarAlCarrito = (item) => {
+    //Spread del array + item
+    setCarrito([...carrito, item]);
+  }
+
+  const obtenerTotal = () => {
+    return carrito.reduce((acumulador, producto) => {
+      return acumulador + producto.cantidad;
+    }, 0);
+  }
+
+  console.log(carrito);
+
   return (
-    <>
+    //Lo paso con doble llave porque lo paso cómo un objeto.
+    <CartContext.Provider value={{
+      agregarAlCarrito,
+      obtenerTotal
+    }}>
       <header>
         <Router>
           <NavBar />
@@ -28,7 +50,7 @@ function App() {
           </Routes>
         </Router>
       </header>
-    </>
+    </CartContext.Provider>
   );
 }
 

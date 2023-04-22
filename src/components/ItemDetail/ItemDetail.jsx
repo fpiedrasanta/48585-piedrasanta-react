@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {ItemCount} from '../ItemCount/ItemCount'
-import { Button, Nav } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
+import { CartContext } from '../context/CartContext'
 
 import './ItemDetail.css'
 
 export const ItemDetail = ({ producto }) => {
+    
+    const navigate = useNavigate();
+    
+    const volver = () => {
+        navigate(-1);
+    }
+
+    const [counter, setCounter] = useState(0);
+
     const obtenerPrecio = (producto) => {
         let precio = producto.precioUnitarioSinIVA * (1 +  producto.porcentajeIVA / 100);
         let precioConFormato = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(precio);
@@ -12,6 +23,24 @@ export const ItemDetail = ({ producto }) => {
         return precioConFormato;
     }
     
+    //Desestructuro porque al value lo pasé cómo objeto.
+    const { agregarAlCarrito } = useContext(CartContext);
+
+    const sumarAlCarrito = () => { 
+        agregarAlCarrito({
+            id: producto.id,
+            nombre: producto.nombre,
+            descripcion: producto.descripcion,
+            precioUnitarioSinIVA: producto.precioUnitarioSinIVA,
+            porcentajeIVA: producto.porcentajeIVA,
+            urlImagen: producto.urlImagen,
+            categoria: producto.categoria,
+            detalles: producto.detalles,
+            stock: producto.stock,
+            cantidad: counter
+        });
+    }
+
     return (
         <div className="main-content container">
             <div id="detalle_producto" className="row justify-content-center">
@@ -26,10 +55,14 @@ export const ItemDetail = ({ producto }) => {
                     <strong><p>Precio: {obtenerPrecio(producto)}</p></strong>
                     <p>{producto.detalles}</p>
 
-                    <ItemCount />
+                    <ItemCount stock={producto.stock} cantidad={counter} setCantidad={setCounter} />
 
                     <div className="wrap-btn-add-cart">
-                        <Button variant="primary">Agregar al carrito</Button>
+                        <Button variant="primary" onClick={sumarAlCarrito}>Agregar al carrito</Button>
+                    </div>
+
+                    <div className="wrap-btn-return-cart">
+                        <Button variant="secondary" onClick={volver}>Volver</Button>
                     </div>
                 </div>
             </div>

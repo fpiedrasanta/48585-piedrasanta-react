@@ -1,6 +1,6 @@
 .contador {
     display: grid;
-    grid-template-columns: 35px 120px 35px 35px;
+    grid-template-columns: 35px 35px 35px;
     column-gap: 10px;
     row-gap: 10px;
     justify-items: center;
