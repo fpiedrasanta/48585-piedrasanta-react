@@ -3,6 +3,7 @@ import './App.css';
 import { NavBar } from './components/NavBar/NavBar';
 import { ItemListContainer } from './components/ItemListContainer/ItemListContainer';
 import { ItemDetailContainer } from './components/ItemDetailContainer/ItemDetailContainer';
+import { CartScreen } from './components/CartScreen/CartScreen';
 /* import { Error } from './Error'; */
 
 import { CartContext } from './components/context/CartContext';
@@ -23,10 +24,24 @@ function App() {
     setCarrito([...carrito, item]);
   }
 
-  const obtenerTotal = () => {
+  const obtenerCantidadTotal = () => {
     return carrito.reduce((acumulador, producto) => {
       return acumulador + producto.cantidad;
     }, 0);
+  }
+
+  const obtenerPrecioTotal = () => {
+    return carrito.reduce((acumulador, producto) => {
+      return acumulador + (producto.cantidad * producto.precioUnitarioSinIVA * (1 +  producto.porcentajeIVA / 100)) ;
+    }, 0);
+  }
+
+  const quitarDelCarrito = (id) => {
+    const nuevoCarrito = carrito.filter(function(producto) {
+      return producto.id !== id;
+    });
+
+    setCarrito(nuevoCarrito);
   }
 
   console.log(carrito);
@@ -35,7 +50,10 @@ function App() {
     //Lo paso con doble llave porque lo paso cómo un objeto.
     <CartContext.Provider value={{
       agregarAlCarrito,
-      obtenerTotal
+      obtenerCantidadTotal,
+      obtenerPrecioTotal,
+      quitarDelCarrito,
+      carrito
     }}>
       <header>
         <Router>
@@ -45,6 +63,7 @@ function App() {
             <Route path='/' element={<ItemListContainer />} />
             <Route path='/productos/:categoryId' element={<ItemListContainer />} />
             <Route path='/detalle/:itemId' element={<ItemDetailContainer />} />
+            <Route path="/cart" element={<CartScreen />} />
             { /*<Route path='/error' element={<Error />} /> */ }
             { /* <Route path='*' element={<Navigate to='/error' />} /> */ }
           </Routes>
