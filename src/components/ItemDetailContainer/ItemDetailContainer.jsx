@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import {ImSpinner3} from 'react-icons/im'
 import { useParams } from 'react-router-dom'
 import { ItemDetail } from '../ItemDetail/ItemDetail'
+import { getFirestore } from '../../firebase/config'
 
 export const ItemDetailContainer = () => {
 
@@ -16,11 +17,16 @@ export const ItemDetailContainer = () => {
     useEffect(() =>{
         setLoading(true);
     
-        fetch('https://fpiedrasanta.github.io/34150-piedrasanta-javascript/jsons/productos.json')
-            .then((respuesta) => respuesta.json())
-            .then((json) => {
-                console.log(json);
-                setProducto(json.find( producto => producto.id === Number(itemId)));
+        const db = getFirestore();
+
+        const merchandising = db.collection('merchandising');
+
+        merchandising.doc(itemId).get()
+            .then((respuesta) => {
+                setProducto({
+                    id: respuesta.id,
+                    ...respuesta.data()
+                });
             })
             .catch((error) => console.log(error))
             .finally(() => {

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { ImSpinner3 } from 'react-icons/im'
 import { ItemList } from '../ItemList/ItemList';
 import { useParams } from 'react-router-dom';
+import { getFirestore } from '../../firebase/config';
 
 export const ItemListContainer = () => {
   const [productos, setProductos] = useState([]);
@@ -13,14 +14,29 @@ export const ItemListContainer = () => {
   useEffect(() =>{
     setLoading(true);
     
-    fetch('https://fpiedrasanta.github.io/34150-piedrasanta-javascript/jsons/productos.json')
-        .then((respuesta) => respuesta.json())
-        .then((json) => {
-          setProductos(categoryId ? json.filter(producto => producto.categoria === categoryId) : json);
-          setLoading(false);
-        })
-        .catch((error) => console.log(error));
+    const db = getFirestore();
+
+    const merchandising = categoryId ? 
+      db.collection('merchandising').where("categoria", "==", categoryId) : 
+      db.collection('merchandising');
+
+    merchandising.get()
+      .then((respuesta) => {
+        const lista = respuesta.docs.map((documento) => {
+          return {
+            id: documento.id,
+            ...documento.data()
+          };
+        });
+
+        setProductos(lista);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setLoading(false);
+      });
   }, [categoryId]);
+
 
   return (
     <>
