@@ -1,11 +1,15 @@
 import React, {useState, useContext} from 'react';
 import { CartContext } from '../context/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import firebase from 'firebase';
 import Swal from "sweetalert2";
 import { getFirestore } from '../../firebase/config';
 
+import './Checkout.css'
+
 export const Checkout = () => {
+    const navigate = useNavigate();
+
     const { obtenerPrecioTotal, carrito, vaciarCarrito } = useContext(CartContext);
 
     const [email, setEmail] = useState("")
@@ -36,9 +40,10 @@ export const Checkout = () => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Felicidades',
-                    text: `Su compra se realizó con exito!<br>Su número de compra es ${respuesta.id}`,
+                    text: `Su compra se realizó con exito! Su número de compra es ${respuesta.id}`,
                     willClose: () => {
                         vaciarCarrito();
+                        navigate('/');
                     }
                 });
 
@@ -79,9 +84,10 @@ export const Checkout = () => {
                     <label htmlFor="telefono">Teléfono</label>
                     <input type="text" className="form-control" onChange={(e) => setTelefono(e.target.value)} value={telefono}/>
                 </div>
-                
-                <button type='submit' className='btn btn-success'>Finalizar</button>
-                <Link to='/cart' className='btn btn-info'>Volver al carrito</Link>
+                <div className='botonera-checkout'>
+                    <button type='submit' className='btn btn-success btn-finalizar'>Finalizar</button>
+                    <Link to='/cart' className='btn btn-info btn-volver'>Volver al carrito</Link>
+                </div>
             </form>
         </div>
     )

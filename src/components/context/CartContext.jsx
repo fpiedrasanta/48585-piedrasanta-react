@@ -12,13 +12,26 @@ export const CartProvider = ({ children }) => {
     }, [carrito]);
 
     const agregarAlCarrito = (item) => {
-        //Spread del array + item
-        setCarrito([...carrito, item]);
+        const producto = carrito.find(function(producto) {
+            return producto.id === item.id;
+        });
+        
+        if(producto) {
+            const nuevoCarrito = carrito.filter(function(producto) {
+                return producto.id !== item.id;
+            });
+            item.cantidad += producto.cantidad;
+            setCarrito([...nuevoCarrito, item]);
+        } else {
+            setCarrito([...carrito, item]);
+        }
+
+        
     }
 
     const obtenerCantidadTotal = () => {
         return carrito.reduce((acumulador, producto) => {
-        return acumulador + producto.cantidad;
+            return acumulador + producto.cantidad;
         }, 0);
     }
 
@@ -30,10 +43,20 @@ export const CartProvider = ({ children }) => {
 
     const quitarDelCarrito = (id) => {
         const nuevoCarrito = carrito.filter(function(producto) {
-        return producto.id !== id;
+            return producto.id !== id;
         });
 
         setCarrito(nuevoCarrito);
+    }
+
+    const obtenerCantidad = (id) => {
+        if(!carrito) return 0;
+        
+        const producto = carrito.find(function(producto) {
+            return producto.id === id;
+        });
+
+        return producto ? producto.cantidad : 0;
     }
 
     const vaciarCarrito = () => {
@@ -44,6 +67,7 @@ export const CartProvider = ({ children }) => {
         <CartContext.Provider value={{
             agregarAlCarrito,
             obtenerCantidadTotal,
+            obtenerCantidad,
             obtenerPrecioTotal,
             quitarDelCarrito,
             vaciarCarrito,

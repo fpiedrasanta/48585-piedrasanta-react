@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import {ItemCount} from '../ItemCount/ItemCount'
-import { Button } from 'react-bootstrap'
-import { CartContext } from '../context/CartContext'
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {ItemCount} from '../ItemCount/ItemCount';
+import { Button } from 'react-bootstrap';
+import { CartContext } from '../context/CartContext';
+import Swal from "sweetalert2";
 
 import './ItemDetail.css'
 
 export const ItemDetail = ({ producto }) => {
     
     const navigate = useNavigate();
-    
+
     const volver = () => {
         navigate(-1);
     }
@@ -38,6 +39,18 @@ export const ItemDetail = ({ producto }) => {
             detalles: producto.detalles,
             stock: producto.stock,
             cantidad: counter
+        });
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Felicidades',
+            text: `Se agregó el producto ${producto.nombre} exitosamente`,
+            timer: 2000,
+            showConfirmButton: false,
+            willClose: () => {
+                setCounter(0);
+                navigate(-1);
+            }
         });
     }
 

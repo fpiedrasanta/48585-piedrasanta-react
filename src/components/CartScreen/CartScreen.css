@@ -1,0 +1,57 @@
+.botonera-cartscreen {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-confirmar-compra {
+    margin-right: 5px;
+}
+
+.btn-vaciar-carrito {
+    margin-left: 5px;
+    width: 157px;
+}
+
+.detalle-compra {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.detalle-compra-imagen {
+    width: 30%;
+    text-align: center;
+    height: 200px;
+    position: relative;
+}
+
+.detalle-compra-fondo-producto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(5px);
+    opacity: 0.8;
+}
+
+.detalle-compra-imagen-producto {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.detalle-compra-imagen-producto img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.detalle-compra-resumen {
+    width: 40%;
+}
+
+.precio-total {
+    text-align: center;
+    font-weight: bold;
+}

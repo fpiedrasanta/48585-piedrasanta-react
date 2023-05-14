@@ -5,4 +5,30 @@
 
 .product-card {
     width: 18rem;
+    position: relative;
+}
+
+.seleccionado {
+    border-color: green;
+    border-width: 2px; 
+}
+
+#cantidad_producto {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: red;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 2px;
+    font-size: 8pt;
+}
+
+.card-descripcion-producto{
+    height: 70px;
+    overflow: hidden;
 }
